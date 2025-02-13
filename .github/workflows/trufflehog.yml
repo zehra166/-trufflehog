@@ -15,8 +15,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install TruffleHog
-        run: pip install trufflehog
+      - name: Install TruffleHog v3+
+        run: pip install --upgrade trufflehog
 
-      - name: Run TruffleHog
-        run: trufflehog --json --no-update filesystem --entropy=false --max_depth=50 .
+      - name: Verify TruffleHog Version
+        run: trufflehog --version  # Ensure it's v3+
+
+      - name: Run TruffleHog (v3)
+        run: trufflehog filesystem . --json --max_depth=50
